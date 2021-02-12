@@ -1,0 +1,65 @@
+% Inspired from https://www.overleaf.com/latex/templates/rapport-de-projet-de-fin-detudes-slash-pfe-slash-stage-slash-memoire/zbxdppdzgbgc
+% Author: Mathilde Boltenhagen, BoltMaud
+% Date:  02.2021
+
+\documentclass[a4paper,12pt,twoside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel} 
+\usepackage[footnote]{acronym}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\DontPrintSemicolon
+
+% the template
+\usepackage{template}
+
+% path of images 
+\usepackage{graphicx}
+\graphicspath{{images/}{images/}}
+
+\begin{document}
+
+% cover page
+\includepdf[pages=1]{cover/Modele_These_UParisSaclay_2020.pdf}
+
+% style for first pages (header, footer) 
+\frontmatter
+\pagenumbering{Roman}
+\include{tex/Quotation}
+\include{tex/Acknowledgement}
+\include{tex/Abstract}
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}} 
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} 
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+\listofalgorithms
+
+\include{tex/Acronymes}
+\cleardoublepage
+
+% style for main pages (header, footer) 
+\mainmatter
+\pagenumbering{arabic}
+\include{tex/Introduction}
+\include{tex/Contribution1}
+\include{tex/Contribution2}
+\include{tex/Conclusion}
+
+
+
+\appendix
+\appendixpage
+\input{tex/Appendix.tex}
+\clearpage
+\thispagestyle{empty}
+\includepdf[pages=2]{cover/Modele_These_UParisSaclay_2020.pdf}
+
+% to create the doc
+%\includepdf[pagecommand={\thispagestyle{plain}},pages=-]{./Boltenhagen_Mathilde_thesis.pdf}
+
+\end{document}

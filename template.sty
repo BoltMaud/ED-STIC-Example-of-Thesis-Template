@@ -1,0 +1,132 @@
+% All the definitions to understand the template are in this document
+
+% ------------------------------------------------------------------
+%                                      ABOUT PAGES  
+% ------------------------------------------------------------------
+\usepackage{a4wide}
+\usepackage{pdfpages}
+\usepackage{changepage}
+\usepackage{placeins}
+
+
+% ------------------------------------------------------------------
+%                                      ABOUT TITLES  
+% ------------------------------------------------------------------
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fontspec}
+
+% my special font - to install, see folder font-to-install
+\newfontfamily\headingfont[]{Myriad Pro}
+\newfontfamily\headingfontLight{Myriad Pro Light}
+
+
+% chapters
+\titleformat{\chapter}[display]
+  {\huge\headingfont}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat*{\section}{\LARGE\headingfont}
+\titleformat*{\subsection}{\Large\headingfont}
+\renewcommand{\maketitlehooka}{\headingfont}
+
+\newcommand{\mychapter}[2]{
+    \chapter*{#2}
+    \addcontentsline{toc}{chapter}{#2}
+}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+% ------------------------------------------------------------------
+%                                      ABOUT HEADER  
+% ------------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy} 
+\fancypagestyle{main}{
+	\fancyhead[LE]{\headingfontLight\rightmark}
+	\fancyhead[RO]{\headingfontLight\leftmark}
+	\fancyhead[RE]{}
+	\fancyhead[LO]{}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\headingfontLight\thepage}
+	\renewcommand{\headrulewidth}{0.5pt}
+}
+
+\fancypagestyle{plain}{%
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[C]{}
+	\fancyfoot[R]{\headingfontLight\thepage}
+}
+
+% ------------------------------------------------------------------
+%                                      ABOUT TOC OFT  
+% ------------------------------------------------------------------
+\usepackage{tocloft}
+\usepackage{etoolbox}
+\usepackage{hyperref}
+
+\appto\appendix{\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}}
+\addto\captionsenglish{\renewcommand\contentsname{\normalfont \headingfont Table of Contents}}
+\addto\captionsenglish{\renewcommand\listfigurename{\normalfont \headingfont List of Figures}}
+\addto\captionsenglish{\renewcommand\listtablename{\normalfont \headingfont List of Tables}}
+
+\addto\captionsenglish{\renewcommand\appendixname{\normalfont \headingfont Appendices}}
+\addto\captionsenglish{\renewcommand\appendixpagename{\normalfont\huge \headingfont Appendices}}
+
+
+\appto\listoffigures{\addtocontents{lof}{\protect\setcounter{tocdepth}{1}}}
+\appto\listoftables{\addtocontents{lot}{\protect\setcounter{tocdepth}{1}}}
+\appto\listofalgorithms{\addtocontents{loa}{\protect\setcounter{tocdepth}{1}}}
+
+\usepackage[page,toc,titletoc,title]{appendix}
+
+\appto\frontmatter{\pagestyle{plain}}
+\appto\mainmatter{\pagestyle{main}}
+
+
+% ------------------------------------------------------------------
+%                                     EXAMPLE IN BOXES
+% ------------------------------------------------------------------
+\usepackage{tcolorbox}
+
+\newtheorem{example}{Example}[section]
+
+\newcommand{\myexample}[2]{
+    \begin{tcolorbox}[colback=black!5!white, boxrule=1pt]
+	\begin{example}[#2]
+			#1
+	\end{example} 
+    \end{tcolorbox}
+}
+
+% ------------------------------------------------------------------
+%                                     FANCY QUOTES 
+% ------------------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{quotemark}{gray}{0.7}
+\makeatletter
+ % begin fancy quote
+\def\fquote{  \@ifnextchar[{\fquote@i}{\fquote@i[]}  }
+\def\fquote@i[#1]{ \def\tempa{#1}   \@ifnextchar[{\fquote@ii}{\fquote@ii[]}  }
+\def\fquote@ii[#1]{ \def\tempb{#1}  \@ifnextchar[{\fquote@iii}{\fquote@iii[]} }
+\def\fquote@iii[#1]{\def\tempc{#1}  \vspace{1em} \noindent
+    \begin{list}{}{
+         \setlength{\leftmargin}{0.1\textwidth}
+         \setlength{\rightmargin}{0.1\textwidth} }
+         \item[]
+         \begin{picture}(0,0)
+        		 \put(-15,-5){\makebox(0,0){\scalebox{3}{\textcolor{quotemark}{``}}}}
+         \end{picture}
+         \begingroup\itshape}
+         
+ % end fancy quote
+ \def\endfquote{ \endgroup\par \makebox[0pt][l]{ \hspace{0.8\textwidth}
+ \begin{picture}(0,0)(0,0)
+ 	\put(15,15){\makebox(0,0){
+ 	\scalebox{3}{\color{quotemark}''}}}
+ \end{picture}}
+   \vspace{0.5em}
+ \end{list}
+ }
+ \makeatother
+ %%%%********************************************************************
